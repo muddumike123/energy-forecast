@@ -1,4 +1,4 @@
-# leag-energy-forecast
+# energy-forecast
 
 Day-ahead forecasting of load and price for the German **50Hertz** control area, and a
 battery-arbitrage backtest built on those forecasts.
