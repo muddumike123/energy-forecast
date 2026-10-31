@@ -1,0 +1,20 @@
+# Step 1 (ingestion) and step 2 (dbt + DuckDB)
+requests>=2.32
+pandas>=2.2
+pyarrow>=16.0
+numpy>=1.26
+holidays>=0.50
+duckdb>=1.1
+dbt-core>=1.8,<1.11
+dbt-duckdb>=1.8,<1.11
+
+# Step 3 (training) and step 4 (backtest)
+# macOS: XGBoost needs the OpenMP runtime -> `brew install libomp`
+xgboost>=2.1
+scikit-learn>=1.5
+scipy>=1.11
+mlflow>=3.0
+
+# UI
+streamlit>=1.37
+plotly>=5.22

@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: hourly
+    description: Gap-free UTC hourly spine with pivoted SMARD series (50Hertz and DE).
+    columns:
+      - name: ts_utc
+        data_tests: [unique, not_null]
+      - name: load_50hz_mw
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                where: "load_50hz_mw is not null"
+      - name: price_eur_mwh
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: -500
+                max_value: 5000
+                where: "price_eur_mwh is not null"
+
+  - name: features
+    description: Model-ready hourly features with calendar, holidays, lags and weather.
+    columns:
+      - name: ts_utc
+        data_tests: [unique, not_null]
+      - name: ts_local
+        data_tests: [not_null]
+      - name: hour_local
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 23
+      - name: price_lag_48h
+        description: Price 48 hours earlier; null only for the first 48 hours of history.

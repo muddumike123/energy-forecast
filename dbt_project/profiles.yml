@@ -1,0 +1,7 @@
+leag_energy:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('LEAG_DUCKDB_PATH', '../data/leag.duckdb') }}"
+      threads: 4

@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_smard
+    description: Hourly SMARD series in UTC, one row per series, region and hour.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [series, region, ts_utc]
+    columns:
+      - name: ts_utc
+        data_tests: [not_null]
+      - name: series
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [load, residual_load, solar, wind_onshore, wind_offshore, price]
+      - name: region
+        data_tests: [not_null]
+
+  - name: stg_weather
+    description: Hourly Bright Sky observations in UTC, one row per city and hour.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [city, ts_utc]
+    columns:
+      - name: city
+        data_tests: [not_null]
+      - name: ts_utc
+        data_tests: [not_null]
+
+  - name: stg_holidays
+    description: Public holidays for DE, BB and SN.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [holiday_date, region]

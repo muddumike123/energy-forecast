@@ -1,0 +1,21 @@
+name: leag_energy
+version: "0.1.0"
+config-version: 2
+
+profile: leag_energy
+
+model-paths: ["models"]
+test-paths: ["tests"]
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  raw_dir: "{{ env_var('LEAG_RAW_DIR', '../data/raw') }}"
+
+models:
+  leag_energy:
+    staging:
+      # Tables, not views: a view would keep the relative raw_dir path and
+      # break when DuckDB is opened from another directory (e.g. the UI).
+      +materialized: table
+    marts:
+      +materialized: table
