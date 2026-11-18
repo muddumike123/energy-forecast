@@ -8,7 +8,7 @@ import pandas as pd
 
 from config import DUCKDB_PATH, TEST_WEEKS
 
-TARGETS = ["load_50hz_mw", "residual_load_de_mw", "price_eur_mwh"]
+TARGETS = ["load_de_mw", "residual_load_de_mw", "residual_load_50hz_mw", "price_eur_mwh"]
 
 
 def load_features() -> pd.DataFrame:

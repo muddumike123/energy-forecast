@@ -13,3 +13,4 @@ mlflow.db
 data/predictions/
 data/backtest/
 .DS_Store
+logs/

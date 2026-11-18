@@ -169,13 +169,13 @@ Make shortcuts: `make all` (steps 1–4), `make ingest`, `make dbt`, `make train
   target × model (params, MAE/RMSE/skill, XGBoost model and feature importance). Backtests log
   revenue and capture rate.
 
-**UI tabs**
+**UI pages** (sidebar navigation)
 
-| Tab | Shows |
+| Page | Shows |
 |---|---|
+| Overview | headline KPIs, price over the last 7 days against each forecast, best model per target |
+| Forecasts | skill vs the baseline per target, actual-vs-forecast chart, error by hour of day, XGBoost feature importance |
+| Battery backtest | revenue and capture rate per strategy, cumulative capture over time, and a day view of price against battery MW |
+| Explorer | load, residual load, stacked renewable generation and price over any date range, plus the daily load profile |
+| Data quality | dbt test status, source coverage, missing hours per day, feature correlations, null counts, latest rows |
 | Pipeline | run steps 1–4 from the browser with live logs, plus the last dbt results |
-| Data coverage | rows, ranges and missing hours per series and city |
-| Explorer | load, renewables and price over any date range, plus the daily load profile |
-| Features & quality | feature correlations, null counts, latest rows |
-| Forecasts | metrics table, actual-vs-forecast chart, XGBoost feature importance |
-| Battery backtest | revenue per strategy, cumulative revenue, and per-day prices and schedules |
