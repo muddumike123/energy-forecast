@@ -90,6 +90,9 @@ select
     lag(h.load_50hz_mw, 48) over (order by h.ts_utc) as load_lag_48h,
     lag(h.load_50hz_mw, 168) over (order by h.ts_utc) as load_lag_168h,
     lag(h.load_50hz_mw, 336) over (order by h.ts_utc) as load_lag_336h,
+    lag(h.load_de_mw, 48) over (order by h.ts_utc) as load_de_lag_48h,
+    lag(h.load_de_mw, 168) over (order by h.ts_utc) as load_de_lag_168h,
+    lag(h.load_de_mw, 336) over (order by h.ts_utc) as load_de_lag_336h,
 
     -- weather (observed; see caveat above)
     w.weather_temp_avg_c,

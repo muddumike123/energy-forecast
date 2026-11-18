@@ -7,10 +7,11 @@ Usage (from the project root):
 Every forecast is what could be issued at 12:00 on D-1: calendar features,
 lags available at that time, and (for price) a residual-load forecast.
 
-Order of models:
-  1. load_50hz_mw          XGBoost vs linear regression vs same hour last week
-  2. residual_load_de_mw   same; its forecast feeds the price model
-  3. price_eur_mwh         same, with the residual-load forecast as a feature
+Order of models (reported targets: load DE, residual load 50Hertz, price DE-LU):
+  1. load_de_mw            XGBoost vs linear regression vs same hour last week
+  2. residual_load_de_mw   same; internal, its forecast feeds the price model
+  3. residual_load_50hz_mw same; reported
+  4. price_eur_mwh         same, with the German residual-load forecast as a feature
 """
 
 import argparse
@@ -43,16 +44,22 @@ class TargetSpec:
 
 SPECS = [
     TargetSpec(
-        name="load",
-        target="load_50hz_mw",
-        naive="load_lag_168h",
-        features=CALENDAR + ["load_lag_48h", "load_lag_168h", "load_lag_336h"],
+        name="load_de",
+        target="load_de_mw",
+        naive="load_de_lag_168h",
+        features=CALENDAR + ["load_de_lag_48h", "load_de_lag_168h", "load_de_lag_336h"],
     ),
     TargetSpec(
         name="residual_load_de",
         target="residual_load_de_mw",
         naive="residual_load_de_lag_168h",
         features=CALENDAR + ["residual_load_de_lag_48h", "residual_load_de_lag_168h", "residual_load_de_lag_336h"],
+    ),
+    TargetSpec(
+        name="residual_load_50hz",
+        target="residual_load_50hz_mw",
+        naive="residual_load_lag_168h",
+        features=CALENDAR + ["residual_load_lag_48h", "residual_load_lag_168h", "residual_load_lag_336h"],
     ),
     TargetSpec(
         name="price",
